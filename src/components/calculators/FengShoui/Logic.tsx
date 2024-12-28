@@ -172,7 +172,7 @@ const FengShuiLogic: React.FC = () => {
     field: keyof FormData,
     type: "text" | "number" = "text",
     placeholder: string
-  ): JSX.Element => (
+  ): React.ReactElement => (
     <div className="space-y-2">
       <label className="text-lg font-medium">{label}</label>
       <Input
