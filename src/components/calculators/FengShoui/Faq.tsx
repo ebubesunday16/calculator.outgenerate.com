@@ -1,4 +1,4 @@
-import { ChevronDown, ChevronUp, Sparkles, Calendar, BookOpen, Gem, Compass } from 'lucide-react';
+import { Sparkles, Calendar, BookOpen, Gem, Compass } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,

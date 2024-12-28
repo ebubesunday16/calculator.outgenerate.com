@@ -1,6 +1,5 @@
 
-import Footer from '@/components/LayoutComponents/Footer';
-import HeaderComponent from '@/components/LayoutComponents/Header';
+
 import Hero from '@/components/LayoutComponents/Hero';
 import RecentCarousel from '@/components/LayoutComponents/RecentCarousel';
 import Image from 'next/image';

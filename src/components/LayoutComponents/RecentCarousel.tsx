@@ -1,6 +1,6 @@
 import { CalculatorConfig } from "@/types";
 import TravelContainer from "../reusables/travelcontainer";
-import { Illustration, Thumbnail, Thumbnail2, Thumbnail4, Thumbnail5, Thumbnail6 } from "../svgs"; // Import your thumbnails
+import {  Thumbnail, Thumbnail2, Thumbnail4, Thumbnail5, Thumbnail6 } from "../svgs"; // Import your thumbnails
 
 const RecentCarousel = ({ className, calculators }: { className: string; calculators: CalculatorConfig[] }) => {
   const backgroundClasses = [

@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Calendar, Info, Calculator, Heart, ArrowRight, ArrowLeft, PartyPopper } from 'lucide-react';
 import {
   Card,

@@ -1,7 +1,6 @@
 import { 
   Calculator, 
   Brain, 
-  Lightbulb, 
   Code2, 
   Heart, 
   Sparkles,

@@ -1,12 +1,9 @@
 import { 
   Calculator, 
   Calendar, 
-  Heart, 
-  Info, 
   Star, 
   Award,
   BookOpen,
-  Clock
 } from 'lucide-react';
 import { 
   Card,

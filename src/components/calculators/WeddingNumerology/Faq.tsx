@@ -1,6 +1,5 @@
 import { 
   HelpCircle, 
-  ChevronDown,
   Calculator,
   Calendar,
   Heart

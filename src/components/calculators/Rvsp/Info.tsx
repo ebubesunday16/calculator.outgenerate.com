@@ -1,5 +1,5 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
-import { Calendar, Clock, Users, Mail, AlertCircle, CheckCircle2, PhoneCall } from 'lucide-react';
+import { Calendar, Clock,  CheckCircle2, PhoneCall, AlertCircle } from 'lucide-react';
 
 const RSVPInfo = () => {
   return (

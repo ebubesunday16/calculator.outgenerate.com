@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { CalculatorConfig } from "@/types"
 import TravelContainer from "../reusables/travelcontainer"
-import { Illustration, Thumbnail, Thumbnail2, Thumbnail4, Thumbnail5, Thumbnail6 } from "../svgs";
+import { Thumbnail, Thumbnail2, Thumbnail4, Thumbnail5, Thumbnail6 } from "../svgs";
 
 const TabbedCalculator = ({ calculators }: { calculators: CalculatorConfig[] }) => {
     const categories = Array.from(new Set(calculators.map((calculator) => calculator.category)));
