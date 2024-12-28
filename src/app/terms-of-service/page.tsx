@@ -1,4 +1,11 @@
 import { AlertTriangle, FileText, Shield } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: 'Terms of Service | Outgenerate',
+  description: 'From calorie counters (BMI included) to Calculus, and every conversion metric in between—down to the last 0-degree precision, all powered by the best of algorithms.',
+
+}
 
 const TermsOfService = () => {
   return (
