@@ -187,7 +187,7 @@ const FengShuiLogic: React.FC = () => {
     </div>
   );
 
-  const renderStep = (): JSX.Element => {
+  const renderStep = (): React.ReactElement => {
     switch(step) {
       case 1:
         return (
