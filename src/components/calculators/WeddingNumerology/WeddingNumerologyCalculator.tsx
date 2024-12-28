@@ -1,7 +1,7 @@
 import ReusableHero from "@/components/reusables/reusablehero"
 import { Calculators } from "@/config/calculator"
 import WeddingNumerologyLogic from "./Logic"
-import NumerologyInfo from "./info"
+import NumerologyInfo from "./Info"
 import NumerologyFAQ from "./Faq"
 import RecentCarousel from "@/components/LayoutComponents/RecentCarousel"
 
