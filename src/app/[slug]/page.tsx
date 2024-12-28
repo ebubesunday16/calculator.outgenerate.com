@@ -4,18 +4,19 @@ import { Metadata, ResolvingMetadata } from "next";
 import { Calculators } from "@/config/calculator";
 import { getCalculatorComponent } from "@/components/calculators";
 
-type Props = {
-    params: {
+interface PageProps {
+    params: Promise<{
         slug: string;
-    };
-    searchParams: { [key: string]: string | string[] | undefined };
+    }>;
+    searchParams?: { [key: string]: string | string[] | undefined };
 }
 
 export async function generateMetadata(
-    { params }: Props,
+    { params }: PageProps,
     parent: ResolvingMetadata 
 ): Promise<Metadata> {
-    const calculator = getCalculatorsBySlug(params.slug)
+    const resolvedParams = await params;
+    const calculator = getCalculatorsBySlug(resolvedParams.slug)
     if (!calculator){
         return{
             title: 'Calculator Not Found',
@@ -27,13 +28,14 @@ export async function generateMetadata(
         keywords: calculator.metadata.keywords,
         metadataBase: new URL('https://calculator.outgenerate.com'),
         alternates: {
-            canonical: `https://calculator.outgenerate.com/${params.slug}`,
+            canonical: `https://calculator.outgenerate.com/${resolvedParams.slug}`,
         },
     }
 }
 
-export default function CalculatorPage({ params }: Props) {
-    const calculator = getCalculatorsBySlug(params.slug)
+export default async function CalculatorPage({ params }: PageProps) {
+    const resolvedParams = await params;
+    const calculator = getCalculatorsBySlug(resolvedParams.slug)
     if (!calculator) {
         notFound()
     }
