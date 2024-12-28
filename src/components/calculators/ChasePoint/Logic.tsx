@@ -1,56 +1,82 @@
 'use client'
-import  { useState } from 'react';
+import { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Calculator, CreditCard } from "lucide-react";
 
-const ChasePointsLogic = () => {
-  const [points, setPoints] = useState('');
-  const [cardType, setCardType] = useState('');
+// Define types for card values
+type CardType = 
+  | 'sapphire-reserve'
+  | 'sapphire-preferred'
+  | 'ink-preferred'
+  | 'freedom-flex'
+  | 'freedom-unlimited'
+  | 'ink-cash'
+  | 'ink-unlimited';
 
-  const cardValues = {
-    'sapphire-reserve': {
-      portalValue: 1.5,
-      transferValue: 2.1,
-      name: 'Chase Sapphire Reserve®'
-    },
-    'sapphire-preferred': {
-      portalValue: 1.25,
-      transferValue: 2.1,
-      name: 'Chase Sapphire Preferred®'
-    },
-    'ink-preferred': {
-      portalValue: 1.25,
-      transferValue: 2.1,
-      name: 'Ink Business Preferred®'
-    },
-    'freedom-flex': {
-      portalValue: 1,
-      transferValue: 1,
-      name: 'Chase Freedom Flex®'
-    },
-    'freedom-unlimited': {
-      portalValue: 1,
-      transferValue: 1,
-      name: 'Chase Freedom Unlimited®'
-    },
-    'ink-cash': {
-      portalValue: 1,
-      transferValue: 1,
-      name: 'Ink Business Cash®'
-    },
-    'ink-unlimited': {
-      portalValue: 1,
-      transferValue: 1,
-      name: 'Ink Business Unlimited®'
-    }
-  };
+interface CardValue {
+  portalValue: number;
+  transferValue: number;
+  name: string;
+}
 
-  const calculateValues = () => {
+interface CalculationResult {
+  portalValue: string;
+  transferValue: string;
+  cardName: string;
+}
+
+type CardValues = Record<CardType, CardValue>;
+
+const cardValues: CardValues = {
+  'sapphire-reserve': {
+    portalValue: 1.5,
+    transferValue: 2.1,
+    name: 'Chase Sapphire Reserve®'
+  },
+  'sapphire-preferred': {
+    portalValue: 1.25,
+    transferValue: 2.1,
+    name: 'Chase Sapphire Preferred®'
+  },
+  'ink-preferred': {
+    portalValue: 1.25,
+    transferValue: 2.1,
+    name: 'Ink Business Preferred®'
+  },
+  'freedom-flex': {
+    portalValue: 1,
+    transferValue: 1,
+    name: 'Chase Freedom Flex®'
+  },
+  'freedom-unlimited': {
+    portalValue: 1,
+    transferValue: 1,
+    name: 'Chase Freedom Unlimited®'
+  },
+  'ink-cash': {
+    portalValue: 1,
+    transferValue: 1,
+    name: 'Ink Business Cash®'
+  },
+  'ink-unlimited': {
+    portalValue: 1,
+    transferValue: 1,
+    name: 'Ink Business Unlimited®'
+  }
+};
+
+const ChasePointsLogic: React.FC = () => {
+  const [points, setPoints] = useState<string>('');
+  const [cardType, setCardType] = useState<CardType | ''>('');
+
+  const calculateValues = (): CalculationResult | null => {
     if (!points || !cardType) return null;
     
     const numPoints = parseFloat(points);
+    if (isNaN(numPoints)) return null;
+    
     const card = cardValues[cardType];
     
     const portalValue = (numPoints * card.portalValue / 100).toFixed(2);
@@ -65,8 +91,16 @@ const ChasePointsLogic = () => {
 
   const results = calculateValues();
 
+  const handlePointsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPoints(e.target.value);
+  };
+
+  const handleCardTypeChange = (value: string) => {
+    setCardType(value as CardType);
+  };
+
   return (
-    <Card className="w-full max-w-5xl mx-auto ">
+    <Card className="w-full max-w-5xl mx-auto">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Calculator className="w-6 h-6" />
@@ -80,24 +114,25 @@ const ChasePointsLogic = () => {
       <CardContent className="space-y-6">
         <div className="space-y-4">
           <div className="space-y-2">
-            <label className="text-sm font-medium">Number of Points</label>
+            <label htmlFor="points" className="text-sm font-medium">Number of Points</label>
             <Input
+              id="points"
               type="number"
               placeholder="Enter number of points"
               value={points}
-              onChange={(e) => setPoints(e.target.value)}
+              onChange={handlePointsChange}
               className="w-full"
             />
           </div>
 
           <div className="space-y-2">
-            <label className="text-sm font-medium">Select Your Chase Card</label>
-            <Select value={cardType} onValueChange={setCardType}>
-              <SelectTrigger className="w-full">
+            <label htmlFor="card-select" className="text-sm font-medium">Select Your Chase Card</label>
+            <Select value={cardType} onValueChange={handleCardTypeChange}>
+              <SelectTrigger id="card-select" className="w-full">
                 <SelectValue placeholder="Select your Chase card" />
               </SelectTrigger>
               <SelectContent>
-                {Object.entries(cardValues).map(([key, value]) => (
+                {(Object.entries(cardValues) as [CardType, CardValue][]).map(([key, value]) => (
                   <SelectItem key={key} value={key}>
                     <div className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4" />

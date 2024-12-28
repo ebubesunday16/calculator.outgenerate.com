@@ -1,7 +1,13 @@
 
 import { CalculatorConfig } from "@/types"
 
-const ReusableHero = ({className, calculator}:{className: string, calculator: CalculatorConfig}) => {
+type ReusableHeroProps = {
+  className?: string;
+  calculator: CalculatorConfig
+
+}
+
+const ReusableHero = ({className, calculator}: ReusableHeroProps) => {
   return (
     <div className={`
     ${className}

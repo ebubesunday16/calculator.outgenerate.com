@@ -7,7 +7,7 @@ import CakeInfo from "./Info"
 
 
 const WeddingCakeCalculator = () => {
-    const calculator = Calculators.find((calculator) => calculator.id === 'wedding-cake-cost')
+    const calculator = Calculators.find((calculator) => calculator.id === 'wedding-cake-cost')!
 
 
   return (

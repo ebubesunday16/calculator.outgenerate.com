@@ -1,3 +1,4 @@
+import { FC } from "react";
 import { CalculatorConfig } from "@/types";
 import Link from "next/link";
 import { Ellipse, Embellishments } from "../svgs";
@@ -9,7 +10,7 @@ const TravelContainer = ({
 }: {
   calculator: CalculatorConfig;
   className: string;
-  thumbnail: React.FC;
+  thumbnail: FC<{className?: string}>;
 }) => {
   return (
     <div className="border border-black rounded-[15px] min-w-[280px]">

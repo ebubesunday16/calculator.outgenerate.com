@@ -1,32 +1,76 @@
 'use client'
 
 import React, { useState } from 'react';
-import {  Heart,  Info, ArrowRight, ArrowLeft } from 'lucide-react';
+import { Heart, Info, ArrowRight, ArrowLeft } from 'lucide-react';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 
-const WeddingNumerologyLogic = () => {
-  const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    partner1Name: '',
-    partner1Date: '',
-    partner2Name: '',
-    partner2Date: '',
-    weddingDate: ''
-  });
-  const [results, setResults] = useState(null);
-  const [suggestedDates, setSuggestedDates] = useState([]);
+// Type definitions
+type Step = 1 | 2 | 3 | 4 | 5;
+
+interface FormData {
+  partner1Name: string;
+  partner1Date: string;
+  partner2Name: string;
+  partner2Date: string;
+  weddingDate: string;
+}
+
+interface NumerologyResults {
+  partner1LifePath: number;
+  partner2LifePath: number;
+  marriageNumber: number;
+  universalDay: number | null;
+  dateCompatibility: number | null;
+  monthRating: 'Excellent' | 'Good' | 'Neutral';
+  isIdealDate: boolean;
+}
+
+interface SuggestedDate {
+  date: Date;
+  compatibility: number;
+}
+
+type NumberMeanings = {
+  [K in 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9]: string;
+};
+
+const initialFormData: FormData = {
+  partner1Name: '',
+  partner1Date: '',
+  partner2Name: '',
+  partner2Date: '',
+  weddingDate: ''
+};
+
+const numberMeanings: NumberMeanings = {
+  1: "New beginnings and leadership. A great day for innovative couples!",
+  2: "Partnership and harmony. Perfect for emphasizing your connection.",
+  3: "Creativity and expression. Your wedding may be artistic and fun.",
+  4: "Strong foundation and stability. Excellent for long-lasting marriage.",
+  5: "Adventure and change. Good for unconventional couples.",
+  6: "Love, harmony, and family. The most ideal number for weddings!",
+  7: "Spiritual connection but may be isolating. Consider another date.",
+  8: "Success and power. Good for career-focused couples.",
+  9: "Completion and endings. Not ideal for new beginnings."
+};
+
+const WeddingNumerologyLogic: React.FC = () => {
+  const [currentStep, setCurrentStep] = useState<Step>(1);
+  const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [results, setResults] = useState<NumerologyResults | null>(null);
+  const [suggestedDates, setSuggestedDates] = useState<SuggestedDate[]>([]);
 
   // Helper function to reduce numbers to a single digit
-  const reduceToSingleDigit = (num) => {
+  const reduceToSingleDigit = (num: number): number => {
     if (num <= 9) return num;
     return reduceToSingleDigit(String(num).split('').reduce((a, b) => Number(a) + Number(b), 0));
   };
 
   // Calculate life path number from birth date
-  const calculateLifePath = (dateStr) => {
+  const calculateLifePath = (dateStr: string): number => {
     const date = new Date(dateStr);
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -40,7 +84,7 @@ const WeddingNumerologyLogic = () => {
   };
 
   // Calculate universal day number
-  const calculateUniversalDay = (dateStr) => {
+  const calculateUniversalDay = (dateStr: string): number => {
     const date = new Date(dateStr);
     const month = date.getMonth() + 1;
     const day = date.getDate();
@@ -50,14 +94,14 @@ const WeddingNumerologyLogic = () => {
   };
 
   // Check if date is weekend (Friday, Saturday, Sunday)
-  const isWeekend = (date) => {
+  const isWeekend = (date: Date): boolean => {
     const day = date.getDay();
     return day === 5 || day === 6 || day === 0;
   };
 
   // Find suggested dates
-  const findSuggestedDates = (marriageNumber) => {
-    const suggestedDates = [];
+  const findSuggestedDates = (marriageNumber: number): SuggestedDate[] => {
+    const suggestedDates: SuggestedDate[] = [];
     const startDate = new Date();
     const endDate = new Date();
     endDate.setFullYear(endDate.getFullYear() + 1);
@@ -79,22 +123,11 @@ const WeddingNumerologyLogic = () => {
     return suggestedDates;
   };
 
-  const getNumberMeaning = (num) => {
-    const meanings = {
-      1: "New beginnings and leadership. A great day for innovative couples!",
-      2: "Partnership and harmony. Perfect for emphasizing your connection.",
-      3: "Creativity and expression. Your wedding may be artistic and fun.",
-      4: "Strong foundation and stability. Excellent for long-lasting marriage.",
-      5: "Adventure and change. Good for unconventional couples.",
-      6: "Love, harmony, and family. The most ideal number for weddings!",
-      7: "Spiritual connection but may be isolating. Consider another date.",
-      8: "Success and power. Good for career-focused couples.",
-      9: "Completion and endings. Not ideal for new beginnings."
-    };
-    return meanings[num] || "";
+  const getNumberMeaning = (num: number): string => {
+    return numberMeanings[num as keyof NumberMeanings] || "";
   };
 
-  const calculateResults = () => {
+  const calculateResults = (): void => {
     const partner1LifePath = calculateLifePath(formData.partner1Date);
     const partner2LifePath = calculateLifePath(formData.partner2Date);
     const marriageNumber = reduceToSingleDigit(partner1LifePath + partner2LifePath);
@@ -105,8 +138,9 @@ const WeddingNumerologyLogic = () => {
     setSuggestedDates(suggested);
 
     const weddingMonth = formData.weddingDate ? new Date(formData.weddingDate).getMonth() + 1 : null;
-    const monthRating = weddingMonth === 4 || weddingMonth === 6 ? "Excellent" : 
-                       weddingMonth === 1 || weddingMonth === 2 ? "Good" : "Neutral";
+    const monthRating: NumerologyResults['monthRating'] = 
+      weddingMonth === 4 || weddingMonth === 6 ? "Excellent" : 
+      weddingMonth === 1 || weddingMonth === 2 ? "Good" : "Neutral";
 
     setResults({
       partner1LifePath,
@@ -119,18 +153,27 @@ const WeddingNumerologyLogic = () => {
     });
   };
 
-  const handleNext = () => {
+  const handleNext = (): void => {
     if (currentStep === 4) {
       calculateResults();
     }
-    setCurrentStep(prev => Math.min(prev + 1, 5));
+    setCurrentStep(prev => Math.min(prev + 1, 5) as Step);
   };
 
-  const handleBack = () => {
-    setCurrentStep(prev => Math.max(prev - 1, 1));
+  const handleBack = (): void => {
+    setCurrentStep(prev => Math.max(prev - 1, 1) as Step);
   };
 
-  const renderStep = () => {
+  const handleFormChange = (field: keyof FormData) => (
+    e: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }));
+  };
+
+  const renderStep = (): JSX.Element | null => {
     switch (currentStep) {
       case 1:
         return (
@@ -139,7 +182,7 @@ const WeddingNumerologyLogic = () => {
               <label className="text-sm font-medium">First Partner's Name</label>
               <Input
                 value={formData.partner1Name}
-                onChange={(e) => setFormData({...formData, partner1Name: e.target.value})}
+                onChange={handleFormChange('partner1Name')}
                 placeholder="Enter name"
               />
             </div>
@@ -148,7 +191,7 @@ const WeddingNumerologyLogic = () => {
               <Input
                 type="date"
                 value={formData.partner1Date}
-                onChange={(e) => setFormData({...formData, partner1Date: e.target.value})}
+                onChange={handleFormChange('partner1Date')}
               />
             </div>
           </div>
@@ -160,7 +203,7 @@ const WeddingNumerologyLogic = () => {
               <label className="text-sm font-medium">Second Partner's Name</label>
               <Input
                 value={formData.partner2Name}
-                onChange={(e) => setFormData({...formData, partner2Name: e.target.value})}
+                onChange={handleFormChange('partner2Name')}
                 placeholder="Enter name"
               />
             </div>
@@ -169,7 +212,7 @@ const WeddingNumerologyLogic = () => {
               <Input
                 type="date"
                 value={formData.partner2Date}
-                onChange={(e) => setFormData({...formData, partner2Date: e.target.value})}
+                onChange={handleFormChange('partner2Date')}
               />
             </div>
           </div>
@@ -181,7 +224,7 @@ const WeddingNumerologyLogic = () => {
             <Input
               type="date"
               value={formData.weddingDate}
-              onChange={(e) => setFormData({...formData, weddingDate: e.target.value})}
+              onChange={handleFormChange('weddingDate')}
             />
           </div>
         );
@@ -212,7 +255,7 @@ const WeddingNumerologyLogic = () => {
               )}
             </div>
 
-            {formData.weddingDate && (
+            {formData.weddingDate && results.dateCompatibility && (
               <Alert className={results.isIdealDate ? "bg-green-50" : "bg-yellow-50"}>
                 <AlertDescription>
                   <div className="flex items-start gap-2">

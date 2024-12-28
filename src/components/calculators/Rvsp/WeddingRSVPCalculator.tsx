@@ -8,7 +8,7 @@ import RSVPFaq from "./Faq"
 
 
 const WeddingRSVPCalculator = () => {
-  const calculator = Calculators.find((calculator) => calculator.id === 'wedding-rsvp-date')
+  const calculator = Calculators.find((calculator) => calculator.id === 'wedding-rsvp-date')!
 
   return (
     <div>

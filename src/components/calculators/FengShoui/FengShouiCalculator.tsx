@@ -7,7 +7,7 @@ import FengShuiFaq from "./Faq"
 
 
 const FengShouiCalculator = () => {
-  const calculator = Calculators.find((calculator) => calculator.id === 'feng-shui-wedding')
+  const calculator = Calculators.find((calculator) => calculator.id === 'feng-shui-wedding')!
 
   return (
     <div>

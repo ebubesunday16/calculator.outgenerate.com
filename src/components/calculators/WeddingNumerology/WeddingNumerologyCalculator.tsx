@@ -7,7 +7,7 @@ import RecentCarousel from "@/components/LayoutComponents/RecentCarousel"
 
 
 const WeddingNumerologyCalculator = () => {
-    const calculator = Calculators.find((calculator) => calculator.id === 'wedding-numerology')
+    const calculator = Calculators.find((calculator) => calculator.id === 'wedding-numerology')!
 
   return (
     <div>

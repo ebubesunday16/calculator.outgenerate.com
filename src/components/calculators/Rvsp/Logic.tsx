@@ -6,21 +6,36 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Calendar, Clock, MapPin, Users, Calendar as CalendarIcon, AlertCircle } from 'lucide-react';
+import { Calendar, Clock, MapPin, Users, Calendar as CalendarIcon, AlertCircle, LucideIcon } from 'lucide-react';
 
-const WeddingRSVPLogic = () => {
-  const [weddingDate, setWeddingDate] = useState('');
-  const [isDestination, setIsDestination] = useState(false);
-  const [dates, setDates] = useState(null);
-  
-  const calculateDates = () => {
+interface WeddingDates {
+  wedding: Date;
+  invitationDate: Date;
+  rsvpDeadline: Date;
+  followUpDate: Date;
+  finalizeDate: Date;
+  lastCallDate: Date;
+}
+
+interface TimelineItemProps {
+  icon: React.ReactNode;
+  date: string;
+  title: string;
+  description: string;
+}
+
+const WeddingRSVPLogic: React.FC = () => {
+  const [weddingDate, setWeddingDate] = useState<string>('');
+  const [isDestination, setIsDestination] = useState<boolean>(false);
+  const [dates, setDates] = useState<WeddingDates | null>(null);
+
+  const calculateDates = (): void => {
     if (!weddingDate) return;
-    
+
     const wedding = new Date(weddingDate);
-    const today = new Date();
     
     // Calculate all important dates
-    const dates = {
+    const dates: WeddingDates = {
       wedding: wedding,
       invitationDate: new Date(wedding),
       rsvpDeadline: new Date(wedding),
@@ -28,34 +43,42 @@ const WeddingRSVPLogic = () => {
       finalizeDate: new Date(wedding),
       lastCallDate: new Date(wedding)
     };
-    
+
     // Set invitation send date (6-8 weeks before for regular, 10-12 for destination)
     dates.invitationDate.setDate(
       wedding.getDate() - (isDestination ? 84 : 56)
     );
-    
+
     // Set RSVP deadline (4 weeks before)
     dates.rsvpDeadline.setDate(wedding.getDate() - 28);
-    
+
     // Set follow-up date (3 weeks before)
     dates.followUpDate.setDate(wedding.getDate() - 21);
-    
+
     // Set finalize date (2 weeks before)
     dates.finalizeDate.setDate(wedding.getDate() - 14);
-    
+
     // Set last call date (1 week before)
     dates.lastCallDate.setDate(wedding.getDate() - 7);
-    
+
     setDates(dates);
   };
-  
-  const formatDate = (date) => {
-    return new Date(date).toLocaleDateString('en-US', {
+
+  const formatDate = (date: Date): string => {
+    return date.toLocaleDateString('en-US', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
       day: 'numeric'
     });
+  };
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setWeddingDate(e.target.value);
+  };
+
+  const handleDestinationChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setIsDestination(e.target.checked);
   };
 
   return (
@@ -75,17 +98,17 @@ const WeddingRSVPLogic = () => {
                 id="wedding-date"
                 type="date"
                 value={weddingDate}
-                onChange={(e) => setWeddingDate(e.target.value)}
+                onChange={handleDateChange}
                 className="w-full"
               />
             </div>
-            
+
             <div className="flex items-center space-x-2">
               <input
                 type="checkbox"
                 id="destination"
                 checked={isDestination}
-                onChange={(e) => setIsDestination(e.target.checked)}
+                onChange={handleDestinationChange}
                 className="w-4 h-4"
               />
               <Label htmlFor="destination" className="flex items-center gap-2">
@@ -93,7 +116,7 @@ const WeddingRSVPLogic = () => {
                 This is a destination wedding
               </Label>
             </div>
-            
+
             <Button onClick={calculateDates} className="w-full">
               Calculate Timeline
             </Button>
@@ -109,7 +132,7 @@ const WeddingRSVPLogic = () => {
               Your wedding is on {formatDate(dates.wedding)}. Here's your recommended RSVP timeline:
             </AlertDescription>
           </Alert>
-          
+
           <Card>
             <CardContent className="pt-6">
               <div className="space-y-6">
@@ -119,28 +142,28 @@ const WeddingRSVPLogic = () => {
                   title="Send Wedding Invitations"
                   description={`Send out your invitations ${isDestination ? '10-12' : '6-8'} weeks before the wedding. This gives guests enough time to make arrangements${isDestination ? ', especially for travel and accommodations' : ''}.`}
                 />
-                
+
                 <TimelineItem
                   icon={<Clock className="w-5 h-5" />}
                   date={formatDate(dates.rsvpDeadline)}
                   title="RSVP Deadline"
                   description="Set your RSVP deadline 4 weeks before the wedding. This is the sweet spot that gives you enough time to finalize details while not being too far in advance that guests forget."
                 />
-                
+
                 <TimelineItem
                   icon={<Users className="w-5 h-5" />}
                   date={formatDate(dates.followUpDate)}
                   title="Follow Up with Non-Respondents"
                   description="Start following up with guests who haven't RSVP'd about a week after the deadline. A friendly phone call or text message usually does the trick."
                 />
-                
+
                 <TimelineItem
                   icon={<Calendar className="w-5 h-5" />}
                   date={formatDate(dates.finalizeDate)}
                   title="Finalize Numbers with Vendors"
                   description="Provide final guest count to your caterer, venue, and other vendors. Start working on seating arrangements and place cards."
                 />
-                
+
                 <TimelineItem
                   icon={<AlertCircle className="w-5 h-5" />}
                   date={formatDate(dates.lastCallDate)}
@@ -156,7 +179,7 @@ const WeddingRSVPLogic = () => {
   );
 };
 
-const TimelineItem = ({ icon, date, title, description }) => (
+const TimelineItem: React.FC<TimelineItemProps> = ({ icon, date, title, description }) => (
   <div className="flex gap-4">
     <div className="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
       {icon}

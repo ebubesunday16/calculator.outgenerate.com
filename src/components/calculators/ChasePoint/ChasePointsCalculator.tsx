@@ -6,12 +6,12 @@ import RecentCarousel from "@/components/LayoutComponents/RecentCarousel"
 import ChasePointsMeta from "./Info"
 
 const ChasePointsCalculator = () => {
-  const calculator = Calculators.find((calculator) => calculator.id === 'chase-points')
+  const calculator = Calculators.find((calculator) => calculator.id === 'chase-points')!
 
   return (
     <div>
       <ReusableHero calculator={calculator}/>
-      <ChasePointsLogic className="mt-16"/>
+      <ChasePointsLogic/>
       <ChasePointsMeta />
       <ChasePointsFAQ />
       <RecentCarousel className="mt-16" calculators={Calculators}/>

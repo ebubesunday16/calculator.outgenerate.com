@@ -1,6 +1,6 @@
 'use client'
-import  { useState } from 'react';
-import { Calendar, Info, Calculator, Heart, ArrowRight, ArrowLeft, PartyPopper } from 'lucide-react';
+import React, { useState } from 'react';
+import { Calendar, Info, Calculator, Heart, ArrowRight, ArrowLeft, PartyPopper, LucideIcon } from 'lucide-react';
 import {
   Card,
   CardContent,
@@ -20,86 +20,121 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Input } from "@/components/ui/input";
 
-const FengShuiLogic = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    spouse1Name: '',
-    spouse1Year: '',
-    spouse2Name: '',
-    spouse2Year: '',
-    weddingYear: '2024',
-    weddingMonth: ''
-  });
-  const [results, setResults] = useState(null);
+// Type definitions
+type ZodiacAnimal = 'Rat' | 'Ox' | 'Tiger' | 'Rabbit' | 'Dragon' | 'Snake' | 'Horse' | 'Goat' | 'Monkey' | 'Rooster' | 'Dog' | 'Pig';
 
-  const months = [
-    { value: '1', label: 'January' },
-    { value: '2', label: 'February' },
-    { value: '3', label: 'March' },
-    { value: '4', label: 'April' },
-    { value: '5', label: 'May' },
-    { value: '6', label: 'June' },
-    { value: '7', label: 'July' },
-    { value: '8', label: 'August' },
-    { value: '9', label: 'September' },
-    { value: '10', label: 'October' },
-    { value: '11', label: 'November' },
-    { value: '12', label: 'December' }
-  ];
+type Month = {
+  value: string;
+  label: string;
+};
 
-  const zodiacAnimals = ['Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig'];
+type FormData = {
+  spouse1Name: string;
+  spouse1Year: string;
+  spouse2Name: string;
+  spouse2Year: string;
+  weddingYear: string;
+  weddingMonth: string;
+};
 
-  const luckyMonths = {
-    '2024': ['1', '2', '3', '6', '7', '8', '12'],
-    '2025': ['1', '3', '5', '7', '8', '9', '12'],
-    '2026': ['2', '4', '6', '8', '10', '12'],
-    '2027': ['1', '3', '5', '7', '9', '11'],
-    '2028': ['2', '4', '6', '8', '10', '12']
+type Results = {
+  spouse1Name: string;
+  spouse2Name: string;
+  sign1: ZodiacAnimal;
+  sign2: ZodiacAnimal;
+  isCompatible: boolean;
+  luckyDates: string[];
+} | null;
+
+type LuckyMonths = {
+  [key in '2024' | '2025' | '2026' | '2027' | '2028']: string[];
+};
+
+type CompatibilityMap = {
+  [key in ZodiacAnimal]: ZodiacAnimal[];
+};
+
+// Constants
+const MONTHS: Month[] = [
+  { value: '1', label: 'January' },
+  { value: '2', label: 'February' },
+  { value: '3', label: 'March' },
+  { value: '4', label: 'April' },
+  { value: '5', label: 'May' },
+  { value: '6', label: 'June' },
+  { value: '7', label: 'July' },
+  { value: '8', label: 'August' },
+  { value: '9', label: 'September' },
+  { value: '10', label: 'October' },
+  { value: '11', label: 'November' },
+  { value: '12', label: 'December' }
+];
+
+const ZODIAC_ANIMALS: ZodiacAnimal[] = ['Rat', 'Ox', 'Tiger', 'Rabbit', 'Dragon', 'Snake', 'Horse', 'Goat', 'Monkey', 'Rooster', 'Dog', 'Pig'];
+
+const LUCKY_MONTHS: LuckyMonths = {
+  '2024': ['1', '2', '3', '6', '7', '8', '12'],
+  '2025': ['1', '3', '5', '7', '8', '9', '12'],
+  '2026': ['2', '4', '6', '8', '10', '12'],
+  '2027': ['1', '3', '5', '7', '9', '11'],
+  '2028': ['2', '4', '6', '8', '10', '12']
+};
+
+const COMPATIBILITY_MAP: CompatibilityMap = {
+  'Rat': ['Dragon', 'Monkey'],
+  'Ox': ['Snake', 'Rooster'],
+  'Tiger': ['Horse', 'Dog'],
+  'Rabbit': ['Goat', 'Pig'],
+  'Dragon': ['Rat', 'Monkey'],
+  'Snake': ['Ox', 'Rooster'],
+  'Horse': ['Tiger', 'Dog'],
+  'Goat': ['Rabbit', 'Pig'],
+  'Monkey': ['Rat', 'Dragon'],
+  'Rooster': ['Ox', 'Snake'],
+  'Dog': ['Tiger', 'Horse'],
+  'Pig': ['Rabbit', 'Goat']
+};
+
+const INITIAL_FORM_DATA: FormData = {
+  spouse1Name: '',
+  spouse1Year: '',
+  spouse2Name: '',
+  spouse2Year: '',
+  weddingYear: '2024',
+  weddingMonth: ''
+};
+
+const FengShuiLogic: React.FC = () => {
+  const [step, setStep] = useState<1 | 2 | 3>(1);
+  const [formData, setFormData] = useState<FormData>(INITIAL_FORM_DATA);
+  const [results, setResults] = useState<Results>(null);
+
+  const getZodiacSign = (year: number): ZodiacAnimal => {
+    return ZODIAC_ANIMALS[(year - 4) % 12];
   };
 
-  const getZodiacSign = (year) => {
-    return zodiacAnimals[(year - 4) % 12];
+  const checkCompatibility = (sign1: ZodiacAnimal, sign2: ZodiacAnimal): boolean => {
+    return COMPATIBILITY_MAP[sign1]?.includes(sign2) ?? false;
   };
 
-  const checkCompatibility = (sign1, sign2) => {
-    const compatibilityMap = {
-      'Rat': ['Dragon', 'Monkey'],
-      'Ox': ['Snake', 'Rooster'],
-      'Tiger': ['Horse', 'Dog'],
-      'Rabbit': ['Goat', 'Pig'],
-      'Dragon': ['Rat', 'Monkey'],
-      'Snake': ['Ox', 'Rooster'],
-      'Horse': ['Tiger', 'Dog'],
-      'Goat': ['Rabbit', 'Pig'],
-      'Monkey': ['Rat', 'Dragon'],
-      'Rooster': ['Ox', 'Snake'],
-      'Dog': ['Tiger', 'Horse'],
-      'Pig': ['Rabbit', 'Goat']
-    };
-    return compatibilityMap[sign1]?.includes(sign2);
-  };
-
-  const isWeekend = (date) => {
+  const isWeekend = (date: string): boolean => {
     const day = new Date(date).getDay();
     return day === 5 || day === 6 || day === 0; // Friday, Saturday, Sunday
   };
 
-  const calculateAuspiciousDates = () => {
+  const calculateAuspiciousDates = (): void => {
     const sign1 = getZodiacSign(parseInt(formData.spouse1Year));
     const sign2 = getZodiacSign(parseInt(formData.spouse2Year));
     const isCompatible = checkCompatibility(sign1, sign2);
 
     const luckyDays = ['1', '2', '8', '9', '10', '11', '20', '21', '28', '29'];
-    
-    // Filter for selected month only
     const selectedMonth = formData.weddingMonth.padStart(2, '0');
     const year = formData.weddingYear;
     
-    // Calculate all dates in the selected month
-    const luckyDates = [];
+    const luckyDates: string[] = [];
     luckyDays.forEach(day => {
       const date = `${year}-${selectedMonth}-${day.padStart(2, '0')}`;
-      if (day <= new Date(year, selectedMonth, 0).getDate() && isWeekend(date)) {
+      if (parseInt(day) <= new Date(parseInt(year), parseInt(selectedMonth), 0).getDate() && isWeekend(date)) {
         luckyDates.push(date);
       }
     });
@@ -110,70 +145,62 @@ const FengShuiLogic = () => {
       sign1,
       sign2,
       isCompatible,
-      luckyDates: luckyDates.slice(0, 5) // Show top 5 weekend dates
+      luckyDates: luckyDates.slice(0, 5)
     });
   };
 
-  const handleNext = () => {
-    setStep(step + 1);
+  const handleNext = (): void => {
+    setStep(step === 3 ? 3 : (step + 1) as 1 | 2 | 3);
   };
 
-  const handleBack = () => {
-    setStep(step - 1);
+  const handleBack = (): void => {
+    setStep(step === 1 ? 1 : (step - 1) as 1 | 2 | 3);
   };
 
-  const renderStep = () => {
+  const handleFormChange = (field: keyof FormData, value: string): void => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const resetForm = (): void => {
+    setResults(null);
+    setStep(1);
+    setFormData(INITIAL_FORM_DATA);
+  };
+
+  const renderInput = (
+    label: string,
+    field: keyof FormData,
+    type: "text" | "number" = "text",
+    placeholder: string
+  ): JSX.Element => (
+    <div className="space-y-2">
+      <label className="text-lg font-medium">{label}</label>
+      <Input
+        type={type}
+        min={type === "number" ? "1900" : undefined}
+        max={type === "number" ? "2024" : undefined}
+        placeholder={placeholder}
+        value={formData[field]}
+        onChange={(e) => handleFormChange(field, e.target.value)}
+        className="text-lg"
+      />
+    </div>
+  );
+
+  const renderStep = (): JSX.Element => {
     switch(step) {
       case 1:
         return (
           <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-lg font-medium">What's your name?</label>
-              <Input
-                placeholder="Enter your name"
-                value={formData.spouse1Name}
-                onChange={(e) => setFormData({...formData, spouse1Name: e.target.value})}
-                className="text-lg"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-lg font-medium">What year were you born?</label>
-              <Input
-                type="number"
-                min="1900"
-                max="2024"
-                placeholder="YYYY"
-                value={formData.spouse1Year}
-                onChange={(e) => setFormData({...formData, spouse1Year: e.target.value})}
-                className="text-lg"
-              />
-            </div>
+            {renderInput("What's your name?", "spouse1Name", "text", "Enter your name")}
+            {renderInput("What year were you born?", "spouse1Year", "number", "YYYY")}
           </div>
         );
       case 2:
         return (
           <div className="space-y-4">
-            <div className="space-y-2">
-              <label className="text-lg font-medium">What's your partner's name?</label>
-              <Input
-                placeholder="Enter your partner's name"
-                value={formData.spouse2Name}
-                onChange={(e) => setFormData({...formData, spouse2Name: e.target.value})}
-                className="text-lg"
-              />
-            </div>
-            <div className="space-y-2">
-              <label className="text-lg font-medium">What year was your partner born?</label>
-              <Input
-                type="number"
-                min="1900"
-                max="2024"
-                placeholder="YYYY"
-                value={formData.spouse2Year}
-                onChange={(e) => setFormData({...formData, spouse2Year: e.target.value})}
-                className="text-lg"
-              />
-            </div>
+            {renderInput("What's your partner's name?", "spouse2Name", "text", "Enter your partner's name")}
+            {renderInput("What year was your partner born?", "spouse2Year", "number", "YYYY")}
           </div>
         );
       case 3:
@@ -183,29 +210,27 @@ const FengShuiLogic = () => {
               <label className="text-lg font-medium">When are you planning to get married?</label>
               <Select 
                 value={formData.weddingYear}
-                onValueChange={(value) => setFormData({...formData, weddingYear: value})}
+                onValueChange={(value) => handleFormChange("weddingYear", value)}
               >
                 <SelectTrigger className="text-lg">
                   <SelectValue placeholder="Select year" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="2024">2024</SelectItem>
-                  <SelectItem value="2025">2025</SelectItem>
-                  <SelectItem value="2026">2026</SelectItem>
-                  <SelectItem value="2027">2027</SelectItem>
-                  <SelectItem value="2028">2028</SelectItem>
+                  {Object.keys(LUCKY_MONTHS).map((year) => (
+                    <SelectItem key={year} value={year}>{year}</SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               
               <Select 
                 value={formData.weddingMonth}
-                onValueChange={(value) => setFormData({...formData, weddingMonth: value})}
+                onValueChange={(value) => handleFormChange("weddingMonth", value)}
               >
                 <SelectTrigger className="text-lg">
                   <SelectValue placeholder="Select month" />
                 </SelectTrigger>
                 <SelectContent>
-                  {months.map((month) => (
+                  {MONTHS.map((month) => (
                     <SelectItem key={month.value} value={month.value}>
                       {month.label}
                     </SelectItem>
@@ -328,18 +353,7 @@ const FengShuiLogic = () => {
               <CardFooter>
                 <Button 
                   variant="outline" 
-                  onClick={() => {
-                    setResults(null);
-                    setStep(1);
-                    setFormData({
-                      spouse1Name: '',
-                      spouse1Year: '',
-                      spouse2Name: '',
-                      spouse2Year: '',
-                      weddingYear: '2024',
-                      weddingMonth: ''
-                    });
-                  }}
+                  onClick={resetForm}
                   className="w-full"
                 >
                   Start Over
@@ -353,4 +367,4 @@ const FengShuiLogic = () => {
   );
 };
 
-export default FengShuiLogic;
+export default FengShuiLogic
