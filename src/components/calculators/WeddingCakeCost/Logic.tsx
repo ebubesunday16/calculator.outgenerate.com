@@ -15,35 +15,107 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const WeddingCakeLogic = () => {
-  const [guestCount, setGuestCount] = useState(100);
-  const [servingSize, setServingSize] = useState("full"); // full or half
-  const [shape, setShape] = useState("round");
-  const [tiers, setTiers] = useState(2);
-  const [frostingType, setFrostingType] = useState("buttercream");
-  const [designComplexity, setDesignComplexity] = useState(1);
-  const [includesTopper, setIncludesTopper] = useState(false);
-  const [includesDelivery, setIncludesDelivery] = useState(true);
-  const [location, setLocation] = useState("suburban");
-  const [flavorComplexity, setFlavorComplexity] = useState("standard");
-  const [specialDietary, setSpecialDietary] = useState(false);
+// Enums for strict type checking
+enum ServingSize {
+  Full = "full",
+  Half = "half"
+}
 
-  const [totalCost, setTotalCost] = useState(0);
-  const [costPerSlice, setCostPerSlice] = useState(0);
+enum CakeShape {
+  Round = "round",
+  Square = "square"
+}
 
-  // Base costs
-  const BASE_SLICE_COSTS = {
-    buttercream: 6,
-    fondant: 10,
+enum FrostingType {
+  Buttercream = "buttercream",
+  Fondant = "fondant"
+}
+
+enum FlavorComplexity {
+  Standard = "standard",
+  Premium = "premium",
+  Luxury = "luxury"
+}
+
+enum LocationType {
+  Rural = "rural",
+  Suburban = "suburban",
+  Urban = "urban"
+}
+
+// Type definitions for various multipliers and costs
+type ComplexityMultipliers = {
+  [key: number]: number;
+};
+
+type LocationMultipliers = {
+  [K in LocationType]: number;
+};
+
+type FlavorMultipliers = {
+  [K in FlavorComplexity]: number;
+};
+
+type BaseSliceCosts = {
+  [K in FrostingType]: number;
+};
+
+// Interface for tooltip content
+interface TooltipContent {
+  servingSize: string;
+  shape: string;
+  tiers: string;
+  designComplexity: {
+    [key: number]: string;
+  };
+  frostingType: {
+    [K in FrostingType]: string;
+  };
+  flavorComplexity: {
+    [K in FlavorComplexity]: string;
+  };
+  dietary: string;
+  topper: string;
+  delivery: string;
+  location: {
+    [K in LocationType]: string;
+  };
+}
+
+// Props interface for InfoTooltip component
+interface InfoTooltipProps {
+  content: string;
+}
+
+const WeddingCakeLogic: React.FC = () => {
+  // State with type definitions
+  const [guestCount, setGuestCount] = useState<number>(100);
+  const [servingSize, setServingSize] = useState<ServingSize>(ServingSize.Full);
+  const [shape, setShape] = useState<CakeShape>(CakeShape.Round);
+  const [tiers, setTiers] = useState<number>(2);
+  const [frostingType, setFrostingType] = useState<FrostingType>(FrostingType.Buttercream);
+  const [designComplexity, setDesignComplexity] = useState<number>(1);
+  const [includesTopper, setIncludesTopper] = useState<boolean>(false);
+  const [includesDelivery, setIncludesDelivery] = useState<boolean>(true);
+  const [location, setLocation] = useState<LocationType>(LocationType.Suburban);
+  const [flavorComplexity, setFlavorComplexity] = useState<FlavorComplexity>(FlavorComplexity.Standard);
+  const [specialDietary, setSpecialDietary] = useState<boolean>(false);
+  const [totalCost, setTotalCost] = useState<number>(0);
+  const [costPerSlice, setCostPerSlice] = useState<number>(0);
+
+  // Constants with proper typing
+  const BASE_SLICE_COSTS: BaseSliceCosts = {
+    [FrostingType.Buttercream]: 6,
+    [FrostingType.Fondant]: 10,
   };
 
-  const LOCATION_MULTIPLIERS = {
-    rural: 0.8,
-    suburban: 1,
-    urban: 1.5,
+  const LOCATION_MULTIPLIERS: LocationMultipliers = {
+    [LocationType.Rural]: 0.8,
+    [LocationType.Suburban]: 1,
+    [LocationType.Urban]: 1.5,
   };
 
-  const COMPLEXITY_MULTIPLIERS = {
+  const COMPLEXITY_MULTIPLIERS: ComplexityMultipliers = {
     1: 1,    // Simple
     2: 1.25, // Moderate
     3: 1.5,  // Complex
@@ -51,20 +123,45 @@ const WeddingCakeLogic = () => {
     5: 2,    // Extremely Complex
   };
 
-  const FLAVOR_MULTIPLIERS = {
-    standard: 1,    // Vanilla, Chocolate
-    premium: 1.2,   // Red Velvet, Lemon
-    luxury: 1.4,    // Custom flavors, specialty combinations
+  const FLAVOR_MULTIPLIERS: FlavorMultipliers = {
+    [FlavorComplexity.Standard]: 1,
+    [FlavorComplexity.Premium]: 1.2,
+    [FlavorComplexity.Luxury]: 1.4,
   };
 
-  useEffect(() => {
-    calculateTotalCost();
-  }, [guestCount, servingSize, shape, tiers, frostingType, designComplexity, 
-      includesTopper, includesDelivery, location, flavorComplexity, specialDietary]);
+  const tooltips: TooltipContent = {
+    servingSize: "Half servings can help reduce costs. Most guests only eat a bite or two!",
+    shape: "Square cakes typically serve more guests per tier than round cakes",
+    tiers: "Each additional tier adds $50 to the base cost",
+    designComplexity: {
+      1: "Simple designs with minimal decoration (+0%)",
+      2: "Basic piping and simple patterns (+25%)",
+      3: "Moderate detail work and textures (+50%)",
+      4: "Complex patterns and handmade decorations (+75%)",
+      5: "Intricate designs, hand-painting, or sugar flowers (+100%)"
+    },
+    frostingType: {
+      [FrostingType.Buttercream]: "Classic, creamy finish ($6/slice base)",
+      [FrostingType.Fondant]: "Smooth, polished finish ($10/slice base)"
+    },
+    flavorComplexity: {
+      [FlavorComplexity.Standard]: "Vanilla, chocolate, or marble (+0%)",
+      [FlavorComplexity.Premium]: "Red velvet, lemon, or fruit flavors (+20%)",
+      [FlavorComplexity.Luxury]: "Custom flavors, specialty combinations (+40%)"
+    },
+    dietary: "Gluten-free, vegan, or other special requirements (+30%)",
+    topper: "Includes a basic cake topper ($35)",
+    delivery: "Professional delivery and setup ($50)",
+    location: {
+      [LocationType.Rural]: "Rural areas (-20% from base price)",
+      [LocationType.Suburban]: "Standard pricing",
+      [LocationType.Urban]: "Major cities (+50% to base price)"
+    }
+  };
 
-  const calculateTotalCost = () => {
+  const calculateTotalCost = (): void => {
     // Calculate number of servings needed
-    const servingsNeeded = servingSize === "full" ? guestCount : Math.ceil(guestCount / 2);
+    const servingsNeeded = servingSize === ServingSize.Full ? guestCount : Math.ceil(guestCount / 2);
     
     // Base cost per slice
     let baseSliceCost = BASE_SLICE_COSTS[frostingType];
@@ -81,56 +178,31 @@ const WeddingCakeLogic = () => {
     }
     
     // Calculate base cake cost
-    let totalCost = adjustedSliceCost * servingsNeeded;
+    let totalCostCalculation = adjustedSliceCost * servingsNeeded;
     
     // Add tier complexity cost
-    totalCost += (tiers - 1) * 50;
+    totalCostCalculation += (tiers - 1) * 50;
     
     // Add delivery if included
     if (includesDelivery) {
-      totalCost += 50;
+      totalCostCalculation += 50;
     }
     
     // Add topper if included
     if (includesTopper) {
-      totalCost += 35;
+      totalCostCalculation += 35;
     }
     
     setCostPerSlice(adjustedSliceCost);
-    setTotalCost(Math.round(totalCost));
+    setTotalCost(Math.round(totalCostCalculation));
   };
 
-  const tooltips = {
-    servingSize: "Half servings can help reduce costs. Most guests only eat a bite or two!",
-    shape: "Square cakes typically serve more guests per tier than round cakes",
-    tiers: "Each additional tier adds $50 to the base cost",
-    designComplexity: {
-      1: "Simple designs with minimal decoration (+0%)",
-      2: "Basic piping and simple patterns (+25%)",
-      3: "Moderate detail work and textures (+50%)",
-      4: "Complex patterns and handmade decorations (+75%)",
-      5: "Intricate designs, hand-painting, or sugar flowers (+100%)"
-    },
-    frostingType: {
-      buttercream: "Classic, creamy finish ($6/slice base)",
-      fondant: "Smooth, polished finish ($10/slice base)"
-    },
-    flavorComplexity: {
-      standard: "Vanilla, chocolate, or marble (+0%)",
-      premium: "Red velvet, lemon, or fruit flavors (+20%)",
-      luxury: "Custom flavors, specialty combinations (+40%)"
-    },
-    dietary: "Gluten-free, vegan, or other special requirements (+30%)",
-    topper: "Includes a basic cake topper ($35)",
-    delivery: "Professional delivery and setup ($50)",
-    location: {
-      rural: "Rural areas (-20% from base price)",
-      suburban: "Standard pricing",
-      urban: "Major cities (+50% to base price)"
-    }
-  };
+  useEffect(() => {
+    calculateTotalCost();
+  }, [guestCount, servingSize, shape, tiers, frostingType, designComplexity, 
+      includesTopper, includesDelivery, location, flavorComplexity, specialDietary]);
 
-  const InfoTooltip = ({ content }) => (
+  const InfoTooltip: React.FC<InfoTooltipProps> = ({ content }) => (
     <TooltipProvider>
       <Tooltip delayDuration={300}>
         <TooltipTrigger>
@@ -143,15 +215,13 @@ const WeddingCakeLogic = () => {
     </TooltipProvider>
   );
 
-
-
+  // JSX remains the same, but now with proper type checking for all values and event handlers
   return (
     <Card className="w-full max-w-3xl mx-auto bg-gradient-to-b from-white to-pink-50/30">
       <CardHeader className="text-center">
         <CardTitle className="flex items-center justify-center gap-3 text-3xl font-serif">
           <Cake className="h-8 w-8 text-pink-400" />
           <h2>Wedding Cake Calculator</h2>
-          
           <Cake className="h-8 w-8 text-pink-400" />
         </CardTitle>
         <p className="text-muted-foreground mt-2">Design your perfect wedding cake and estimate costs</p>
@@ -181,13 +251,13 @@ const WeddingCakeLogic = () => {
                 <Label>Serving Size</Label>
                 <InfoTooltip content={tooltips.servingSize} />
               </div>
-              <Select value={servingSize} onValueChange={setServingSize}>
+              <Select value={servingSize} onValueChange={(value: ServingSize) => setServingSize(value)}>
                 <SelectTrigger className="w-32">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="full">Full Slice</SelectItem>
-                  <SelectItem value="half">Half Slice</SelectItem>
+                  <SelectItem value={ServingSize.Full}>Full Slice</SelectItem>
+                  <SelectItem value={ServingSize.Half}>Half Slice</SelectItem>
                 </SelectContent>
               </Select>
             </div>

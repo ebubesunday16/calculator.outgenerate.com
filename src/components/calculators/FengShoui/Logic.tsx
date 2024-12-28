@@ -240,8 +240,7 @@ const FengShuiLogic: React.FC = () => {
             </div>
           </div>
         );
-      default:
-        return null;
+      
     }
   };
 
