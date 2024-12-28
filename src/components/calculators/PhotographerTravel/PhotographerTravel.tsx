@@ -7,7 +7,7 @@ import RecentCarousel from "@/components/LayoutComponents/RecentCarousel"
     
 
 const PhotographerTravelFee = () => {
-    const calculator = Calculators.find((calculator) => calculator.id === 'photographer-travel-fee')
+    const calculator = Calculators.find((calculator) => calculator.id === 'photographer-travel-fee')!
 
 
   return (
