@@ -99,7 +99,7 @@ export const Calculators: CalculatorConfig[] = [
         slug: 'wedding-cake-cost-calculator',
         category: 'Wedding',
         metadata: {
-          title: 'Wedding Cake Cost Calculator | Comprehensive Price Estimator',
+          title: 'Wedding Cake Cost Calculator',
           description: 'Professional calculator for estimating wedding cake costs including tiers, design complexity, frosting types, and special features. Helps both couples and bakers understand total cake expenses.',
           keywords: [
             'wedding cake cost calculator',
@@ -124,7 +124,7 @@ export const Calculators: CalculatorConfig[] = [
         slug: 'wedding-rsvp-date-calculator',
         category: 'Wedding',
         metadata: {
-          title: 'Wedding RSVP Date Calculator | Timeline Planning Tool',
+          title: 'Wedding RSVP Date Calculator',
           description: 'Professional wedding planning tool to determine ideal RSVP deadlines, invitation send dates, and vendor coordination timelines. Perfect for both destination and local weddings.',
           keywords: [
             'wedding rsvp deadline calculator',
@@ -142,6 +142,88 @@ export const Calculators: CalculatorConfig[] = [
         featured: true,
         dateAdded: '2024-12-26',
         lastUpdated: '2024-12-26'
+      },
+
+    {
+        id: 'wedding-flower-calculator',
+        title: 'Wedding Flower Cost Calculator',
+        description: 'Comprehensive wedding flower cost calculator that estimates expenses for all floral elements including bridal party flowers, ceremony decorations, reception centerpieces, and venue styling. Takes into account seasonality, style preferences, and venue requirements.',
+        slug: 'wedding-flower-cost-calculator',
+        category: 'Wedding',
+        metadata: {
+          title: 'Wedding Flower Cost Calculator | Complete Floral Budget Estimator',
+          description: 'Professional wedding flower cost calculator to estimate expenses for bouquets, centerpieces, venue decoration, and all floral elements. Perfect for couples and wedding planners to budget accurately.',
+          keywords: [
+            'wedding flower cost calculator',
+            'wedding flower budget',
+            'bridal bouquet cost',
+            'wedding floral estimator',
+            'wedding centerpiece costs',
+            'wedding venue decoration price',
+            'wedding flower seasonal costs',
+            'bridesmaid bouquet pricing',
+            'wedding florist budget',
+            'wedding floral planning tool'
+          ],
+        },
+        featured: true,
+        dateAdded: '2024-12-29',
+        lastUpdated: '2024-12-29',
+        
+      },
+
+      {
+        id: 'wedding-alcohol-calculator',
+        title: 'Wedding Alcohol Calculator',
+        description: 'Comprehensive wedding bar planning tool that calculates exact quantities of alcohol needed based on guest count, duration, drinking style, and event details. Includes calculations for wine, beer, spirits, champagne, mixers, and supplies.',
+        slug: 'wedding-alcohol-calculator',
+        category: 'Wedding',
+        metadata: {
+          title: 'Wedding Alcohol Calculator',
+          description: 'Professional wedding alcohol calculator to determine exact quantities of wine, beer, spirits, and supplies needed for your wedding bar. Accounts for guest count, duration, season, and drinking style.',
+          keywords: [
+            'wedding alcohol calculator',
+            'wedding drink calculator',
+            'wedding bar planning',
+            'wedding liquor calculator',
+            'wedding beverage planning',
+            'wedding bar quantities',
+            'wedding drinks per person',
+            'wedding champagne calculator',
+            'wedding bar shopping list',
+            'wedding reception drinks'
+          ],
+        },
+        featured: true,
+        dateAdded: '2024-12-29',
+        lastUpdated: '2024-12-29',
+      },
+
+      {
+        id: 'non-alcoholic-drink-calculator',
+        title: 'Wedding Non-Alcoholic Drink Calculator',
+        description: 'Comprehensive calculator for estimating non-alcoholic beverage quantities needed for weddings. Accounts for guest count, duration, temperature, season, and drink preferences to ensure perfect beverage planning.',
+        slug: 'non-alcoholic-drink-calculator-wedding',
+        category: 'Wedding',
+        metadata: {
+          title: 'Wedding Non-Alcoholic Drink Calculator | Soft Drink',
+          description: 'Professional calculator for wedding planners and couples to estimate non-alcoholic beverage quantities. Includes adjustments for weather, time of day, and seasonal factors for accurate beverage planning.',
+          keywords: [
+            'wedding drink calculator',
+            'non alcoholic drink calculator for wedding',
+            'soft drink calculator for wedding',
+            'wedding beverage planning tool',
+            'wedding reception drink estimates',
+            'wedding beverage quantities',
+            'wedding punch calculator',
+            'wedding refreshment planner',
+            'wedding drink planning',
+            'wedding beverage calculator'
+          ],
+        },
+        featured: true,
+        dateAdded: '2024-12-30',
+        lastUpdated: '2024-12-30',
       },
 
 ] 

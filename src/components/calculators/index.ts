@@ -6,6 +6,9 @@ import WeddingNumerologyCalculator from "./WeddingNumerology/WeddingNumerologyCa
 import FengShouiCalculator from "./FengShoui/FengShouiCalculator";
 import WeddingCakeCalculator from "./WeddingCakeCost/WeddingCakeCalculator";
 import WeddingRSVPCalculator from "./Rvsp/WeddingRSVPCalculator";
+import WeddingFlowerCalculator from "./FlowerCalculator/WeddingFlowerCalculator";
+import WeddingAlcoholCalculator from "./WeddingAlcoholCalculator/WeddingAlcoholCalculator";
+import WeddingDrinkCalculator from "./WeddingDrinkCalculator/WeddingDrinkCalculator";
 
 
 type CalculatorComponent = React.ComponentType<{}>;
@@ -18,6 +21,10 @@ export const CALCULATOR_COMPONENTS: Record<string, CalculatorComponent> = {
     'feng-shui-wedding': FengShouiCalculator,
     'wedding-cake-cost': WeddingCakeCalculator,
     'wedding-rsvp-date': WeddingRSVPCalculator,
+    'wedding-flower-calculator': WeddingFlowerCalculator,
+    'wedding-alcohol-calculator': WeddingAlcoholCalculator,
+    'non-alcoholic-drink-calculator': WeddingDrinkCalculator,
+    
 }
 
 export function getCalculatorComponent(id: string): CalculatorComponent | null {

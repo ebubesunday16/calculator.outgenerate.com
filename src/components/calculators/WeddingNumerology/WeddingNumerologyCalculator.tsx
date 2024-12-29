@@ -10,7 +10,7 @@ const WeddingNumerologyCalculator = () => {
     const calculator = Calculators.find((calculator) => calculator.id === 'wedding-numerology')!
 
   return (
-    <div>
+    <div className="space-y-16">
         <ReusableHero calculator={calculator}/>
         <WeddingNumerologyLogic />
         <NumerologyInfo />
