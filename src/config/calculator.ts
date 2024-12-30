@@ -226,4 +226,30 @@ export const Calculators: CalculatorConfig[] = [
         lastUpdated: '2024-12-30',
       },
 
+      {
+        id: 'wedding-venue-cost',
+        title: 'Wedding Venue Cost Calculator',
+        description: 'Calculate comprehensive wedding venue costs based on location, season, guest count, and additional services. Perfect for couples and wedding planners to estimate accurate venue expenses across different states.',
+        slug: 'wedding-venue-cost-calculator',
+        category: 'Wedding',
+        metadata: {
+          title: 'Wedding Venue Cost Calculator | State-by-State Price Estimator',
+          description: 'Professional calculator for estimating wedding venue costs across different states, including seasonal pricing, guest count adjustments, and additional services. Helps couples and wedding planners understand total venue expenses.',
+          keywords: [
+            'wedding venue cost calculator',
+            'wedding venue pricing',
+            'wedding venue estimator',
+            'wedding venue comparison',
+            'wedding venue services cost',
+            'wedding location pricing',
+            'wedding venue additional services',
+            'wedding catering estimates',
+            'wedding venue setup fees'
+          ],
+        },
+        featured: true,
+        dateAdded: '2024-12-30',
+        lastUpdated: '2024-12-30',
+    }, 
+
 ] 
