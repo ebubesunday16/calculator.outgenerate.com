@@ -10,6 +10,7 @@ import WeddingFlowerCalculator from "./FlowerCalculator/WeddingFlowerCalculator"
 import WeddingAlcoholCalculator from "./WeddingAlcoholCalculator/WeddingAlcoholCalculator";
 import WeddingDrinkCalculator from "./WeddingDrinkCalculator/WeddingDrinkCalculator";
 import WeddingVenueCalculator from "./WeddingVenueCalculator/WeddingVenueCalculator";
+import WeddingTentCalculator from "./WeddingTentCalculator/WeddingTentCalculator";
 
 
 type CalculatorComponent = React.ComponentType<{}>;
@@ -26,6 +27,7 @@ export const CALCULATOR_COMPONENTS: Record<string, CalculatorComponent> = {
     'wedding-alcohol-calculator': WeddingAlcoholCalculator,
     'non-alcoholic-drink-calculator': WeddingDrinkCalculator,
     'wedding-venue-cost': WeddingVenueCalculator,
+    'wedding-tent-calculator': WeddingTentCalculator,
     
 }
 

@@ -252,4 +252,30 @@ export const Calculators: CalculatorConfig[] = [
         lastUpdated: '2024-12-30',
     }, 
 
+  {
+    id: 'wedding-tent-calculator',
+    title: 'Wedding Tent Cost Calculator',
+    description: 'Plan your perfect outdoor wedding with our comprehensive tent cost calculator. Estimate expenses for different tent types, sizes, and additional features like dance floors, lighting, and climate control. Ideal for couples and wedding planners to budget accurately for outdoor ceremonies and receptions.',
+    slug: 'wedding-tent-cost-calculator',
+    category: 'Wedding',
+    metadata: {
+      title: 'Wedding Tent Cost Calculator | Wedding Planning Tool',
+      description: 'Plan your perfect outdoor wedding with our comprehensive tent cost calculator. Estimate expenses for different tent types, sizes, and additional features like dance floors, lighting, and climate control. Ideal for couples and wedding planners to budget accurately for outdoor ceremonies and receptions.',
+      keywords: [
+        'wedding tent calculator',
+        'wedding tent cost',
+        'outdoor wedding planning',
+        'tent rental calculator',
+        'tent size calculator wedding',
+        'wedding tent pricing',
+        'wedding tent rental costs',
+        'tent wedding budget',
+        'wedding tent requirements'
+      ],
+    },
+    featured: true,
+    dateAdded: '2024-12-31',
+    lastUpdated: '2024-12-31'
+},
+
 ] 
