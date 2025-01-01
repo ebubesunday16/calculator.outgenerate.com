@@ -13,6 +13,7 @@ import WeddingVenueCalculator from "./WeddingVenueCalculator/WeddingVenueCalcula
 import WeddingTentCalculator from "./WeddingTentCalculator/WeddingTentCalculator";
 import WeddingCateringCalculator from "./WeddingCateringCalculator/WeddingCateringCalculator";
 import WeddingAnniversaryCalculator from "./WeddingAnniversaryCalculator/WeddingAnniversaryCalculator";
+import WeddingPhotographyCalculator from "./WeddingPhotographyCalculator/WeddingPhotographyCalculator";
 
 
 type CalculatorComponent = React.ComponentType<{}>;
@@ -32,6 +33,8 @@ export const CALCULATOR_COMPONENTS: Record<string, CalculatorComponent> = {
     'wedding-tent-calculator': WeddingTentCalculator,
     'wedding-catering': WeddingCateringCalculator,
     'wedding-anniversary': WeddingAnniversaryCalculator,
+    'wedding-photography-pricing' : WeddingPhotographyCalculator,
+    
     
 }
 

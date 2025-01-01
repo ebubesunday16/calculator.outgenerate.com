@@ -328,4 +328,31 @@ export const Calculators: CalculatorConfig[] = [
   lastUpdated: '2025-01-01',
 },
 
+{
+  id: 'wedding-photography-pricing',
+  title: 'Wedding Photography Pricing Calculator',
+  description: 'Comprehensive wedding photography pricing calculator that helps couples estimate costs based on coverage hours, guest count, and additional services. Includes detailed breakdowns of packages, add-ons, and total investment calculations.',
+  slug: 'wedding-photography-pricing-calculator',
+  category: 'Photography',
+  metadata: {
+    title: 'Wedding Photography Pricing Calculator | Package Cost Estimator',
+    description: 'Professional wedding photography calculator for estimating complete package costs including coverage hours, second shooter, engagement sessions, albums, and additional services. Perfect for couples planning their wedding photography budget.',
+    keywords: [
+      'wedding photography calculator',
+      'wedding photographer pricing',
+      'photography package calculator',
+      'wedding photo cost estimator',
+      'wedding photography rates',
+      'wedding photography packages',
+      'wedding photography investment',
+      'wedding photographer fees',
+      'wedding photography services pricing',
+      'wedding photo package builder'
+    ],
+  },
+  featured: true,
+  dateAdded: '2025-01-01',
+  lastUpdated: '2025-01-01',
+},
+
 ] 
