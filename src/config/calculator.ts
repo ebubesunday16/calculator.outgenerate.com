@@ -278,4 +278,27 @@ export const Calculators: CalculatorConfig[] = [
     lastUpdated: '2024-12-31'
 },
 
+{
+  id: 'wedding-catering',
+  title: 'Wedding Catering Cost Calculator',
+  description: 'Calculate the estimated cost of your wedding catering based on guest count, location, service style, and additional options. Get accurate pricing for your special day.',
+  slug: 'wedding-catering-cost-calculator',
+  category: 'Wedding',
+  metadata: {
+      title: 'Wedding Catering Cost Calculator | Event Planning Tools',
+      description: 'Estimate your wedding catering costs with our comprehensive calculator. Consider guest count, service style, bar options, and special dietary needs for accurate budgeting.',
+      keywords: [
+          'wedding catering calculator',
+          'wedding food cost estimator',
+          'wedding catering budget',
+          'wedding food cost per person',
+          'wedding reception food cost',
+          'wedding menu pricing'
+      ],
+  },
+  featured: true,
+  dateAdded: '2024-12-31',
+  lastUpdated: '2024-12-31',
+},
+
 ] 
