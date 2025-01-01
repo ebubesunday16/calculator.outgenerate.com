@@ -301,4 +301,31 @@ export const Calculators: CalculatorConfig[] = [
   lastUpdated: '2024-12-31',
 },
 
+{
+  id: 'wedding-anniversary',
+  title: 'Wedding Anniversary Calculator',
+  description: 'Calculate your wedding anniversary details including years married, traditional and modern gifts, flowers, gemstones, and countdown to your next celebration. Perfect for couples to track their marriage milestones and find meaningful anniversary gift ideas.',
+  slug: 'wedding-anniversary-calculator',
+  category: 'Wedding',
+  metadata: {
+    title: 'Wedding Anniversary Calculator | Traditional & Modern Gift Guide',
+    description: 'Comprehensive wedding anniversary calculator that provides traditional and modern gift suggestions, symbolic flowers and gemstones, milestone tracking, and countdown to your next anniversary celebration.',
+    keywords: [
+      'wedding anniversary calculator',
+      'marriage anniversary tracker',
+      'traditional anniversary gifts',
+      'modern anniversary gifts',
+      'anniversary gemstones',
+      'anniversary flowers',
+      'marriage milestone calculator',
+      'anniversary countdown',
+      'wedding date calculator',
+      'anniversary gift guide'
+    ],
+  },
+  featured: true,
+  dateAdded: '2025-01-01',
+  lastUpdated: '2025-01-01',
+},
+
 ] 
