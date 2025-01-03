@@ -354,5 +354,58 @@ export const Calculators: CalculatorConfig[] = [
   dateAdded: '2025-01-01',
   lastUpdated: '2025-01-01',
 },
+{
+  id: 'couple-numerology',
+  title: 'Couple Numerology Calculator',
+  description: 'Discover your relationship compatibility through numerology. Calculate life path numbers, soul connections, and destiny numbers to understand your romantic compatibility percentage.',
+  slug: 'couple-numerology-compatibility',
+  category: 'Numerology',
+  metadata: {
+      title: 'Couple Numerology Compatibility Calculator',
+      description: 'Uncover your relationship compatibility with our detailed numerology calculator. Get insights into life path numbers, expression numbers, and overall compatibility percentage.',
+      keywords: [
+          'couple numerology calculator',
+          'relationship compatibility calculator',
+          'numerology compatibility test',
+          'love numerology calculator',
+          'life path number compatibility',
+          'destiny number calculator couples',
+          'relationship numerology',
+          'soul mate numerology calculator',
+          'partner compatibility numerology',
+          'romantic numerology calculator'
+      ],
+  },
+  featured: true,
+  dateAdded: '2024-01-03',
+  lastUpdated: '2024-01-03',
+},
+
+{
+  id: 'chaldean-numerology',
+  title: 'Chaldean Numerology Calculator',
+  description: 'Discover your destiny number, soul urge number, personality number, and expression number using ancient Chaldean numerology. Get detailed interpretations of your core numbers and their influence on your life path.',
+  slug: 'chaldean-numerology-calculator',
+  category: 'Spirituality',
+  metadata: {
+      title: 'Chaldean Numerology Calculator | Name & Birth Date Analysis',
+      description: 'Calculate your core numbers using ancient Chaldean numerology. Get detailed interpretations of your destiny, soul urge, personality, and expression numbers. Understand your life path with our comprehensive analysis.',
+      keywords: [
+          'chaldean numerology calculator',
+          'name numerology calculator',
+          'destiny number calculator',
+          'soul urge number calculator',
+          'personality number calculator',
+          'expression number calculator',
+          'birth date numerology',
+          'numerology meaning calculator',
+          'master numbers calculator',
+          'spiritual number analysis'
+      ],
+  },
+  featured: true,
+  dateAdded: '2025-01-03',
+  lastUpdated: '2025-01-03',
+},
 
 ] 

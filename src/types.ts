@@ -6,6 +6,7 @@ export type CalculatorCategory =
   | 'Conversion'
   | 'Photography'
   | 'Wedding'
+  | 'Numerology'
   // Add more categories as needed
 
 
