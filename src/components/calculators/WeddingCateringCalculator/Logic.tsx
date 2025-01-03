@@ -274,7 +274,7 @@ const WeddingCateringLogic = () => {
   };
 
   return (
-    <div className=" p-6">
+    <div className=" ">
       <Card className="w-full  mx-auto border-rose-200 shadow-lg">
         <CardHeader className="border-b border-rose-100 bg-white/50 backdrop-blur-sm">
           <CardTitle className="flex items-center gap-2 text-rose-700">

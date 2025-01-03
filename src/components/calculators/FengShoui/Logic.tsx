@@ -245,7 +245,7 @@ const FengShuiLogic: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white p-6">
+    <div className="min-h-screen bg-gradient-to-b from-pink-50 to-white ">
       <div className="max-w-5xl mx-auto">
         {!results ? (
           <Card className="backdrop-blur-sm bg-white/90 shadow-xl">

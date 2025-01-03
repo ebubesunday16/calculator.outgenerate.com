@@ -82,7 +82,7 @@ const FengShuiFaq = () => {
   ];
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-4xl mx-auto ">
       <Card className="mb-8">
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-2xl">

@@ -11,7 +11,7 @@ const WeddingTentFaq = () => {
           Frequently Asked Questions About Wedding Tents
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-6">
+      <CardContent className="">
         <Accordion type="single" collapsible className="w-full">
           <AccordionItem value="tent-timing">
             <AccordionTrigger className="text-rose-800 hover:text-rose-900">

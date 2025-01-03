@@ -6,10 +6,10 @@ import ChaldeanNumerologyInfo from './Info'
 import ChaldeanNumerologyFaq from './Faq'
 
 const ChaldeanNumerologyCalculator = () => {
-    const calculator = Calculators.find((calculator) => calculator.id === 'wedding-numerology')!
+    const calculator = Calculators.find((calculator) => calculator.id === 'chaldean-numerology')!
 
   return (
-    <div>
+    <div className='space-y-16'>
 
         <ReusableHero calculator={calculator}/>
         <ChaldeanCalculatorLogic />

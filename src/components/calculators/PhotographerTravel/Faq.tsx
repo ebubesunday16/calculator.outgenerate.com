@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 const TravelCalculatorFAQ = () => {
   const faqs = [
     {
+      
       question: "How is the mileage cost calculated?",
       answer: "Mileage cost is calculated by multiplying the total distance by the mileage rate. The default rate is set to $0.65 per mile, which is based on standard business travel rates. This covers fuel costs, vehicle wear and tear, and basic maintenance. You can adjust this rate based on your specific needs or current IRS standard mileage rates."
     },

@@ -26,7 +26,7 @@ import {
 
 const FengShuiInfo = () => {
   return (
-    <div className="max-w-5xl mx-auto p-6 space-y-8">
+    <div className="max-w-5xl mx-auto  space-y-8">
       <div className="text-center mb-12">
         <h2 className="text-3xl font-bold text-rose-600 mb-4">
           Understanding Feng Shui Wedding Dates

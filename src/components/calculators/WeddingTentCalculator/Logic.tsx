@@ -100,7 +100,7 @@ const WeddingTentLogic = () => {
           Plan the perfect coverage for your special day
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-6 p-6">
+      <CardContent className="space-y-6">
         {/* Guest Count Section */}
         <div className="space-y-2">
           <Label className="flex items-center gap-2 text-rose-700">

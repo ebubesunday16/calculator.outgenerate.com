@@ -188,6 +188,7 @@ const TimelineItem: React.FC<TimelineItemProps> = ({ icon, date, title, descript
       <div className="font-medium text-sm text-primary">{date}</div>
       <div className="font-semibold mb-1">{title}</div>
       <div className="text-sm text-muted-foreground">{description}</div>
+      
     </div>
   </div>
 );

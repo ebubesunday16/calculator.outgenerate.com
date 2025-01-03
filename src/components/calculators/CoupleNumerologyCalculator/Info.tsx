@@ -3,7 +3,7 @@ import { Heart, Info, Calculator, Book, Lightbulb, Target, Sparkles, ScrollText 
 
 const CoupleNumerologyInfo = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6 space-y-6">
+    <div className="max-w-4xl mx-auto  space-y-6">
       {/* Introduction Card */}
       <Card className="bg-gradient-to-r from-pink-50 to-purple-50">
         <CardHeader>
