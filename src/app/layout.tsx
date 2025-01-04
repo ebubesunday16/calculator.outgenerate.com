@@ -3,6 +3,7 @@ import { Public_Sans } from "next/font/google";
 import "./globals.css";
 import HeaderComponent from "@/components/LayoutComponents/Header";
 import Footer from "@/components/LayoutComponents/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const publicSans = Public_Sans({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
         <div className="w-full px-5 py-10 xl:px-0">
         <HeaderComponent className='z-50' />
         {children}
+        <SpeedInsights/>
         <Footer className='mt-24 mb-8' />
 
         </div>
