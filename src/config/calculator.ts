@@ -233,7 +233,7 @@ export const Calculators: CalculatorConfig[] = [
         slug: 'wedding-venue-cost-calculator',
         category: 'Wedding',
         metadata: {
-          title: 'Wedding Venue Cost Calculator | State-by-State Price Estimator',
+          title: 'Wedding Venue Cost Calculator',
           description: 'Professional calculator for estimating wedding venue costs across different states, including seasonal pricing, guest count adjustments, and additional services. Helps couples and wedding planners understand total venue expenses.',
           keywords: [
             'wedding venue cost calculator',
@@ -259,7 +259,7 @@ export const Calculators: CalculatorConfig[] = [
     slug: 'wedding-tent-cost-calculator',
     category: 'Wedding',
     metadata: {
-      title: 'Wedding Tent Cost Calculator | Wedding Planning Tool',
+      title: 'Wedding Tent Cost Calculator',
       description: 'Plan your perfect outdoor wedding with our comprehensive tent cost calculator. Estimate expenses for different tent types, sizes, and additional features like dance floors, lighting, and climate control. Ideal for couples and wedding planners to budget accurately for outdoor ceremonies and receptions.',
       keywords: [
         'wedding tent calculator',
@@ -285,7 +285,7 @@ export const Calculators: CalculatorConfig[] = [
   slug: 'wedding-catering-cost-calculator',
   category: 'Wedding',
   metadata: {
-      title: 'Wedding Catering Cost Calculator | Event Planning Tools',
+      title: 'Wedding Catering Cost Calculator ',
       description: 'Estimate your wedding catering costs with our comprehensive calculator. Consider guest count, service style, bar options, and special dietary needs for accurate budgeting.',
       keywords: [
           'wedding catering calculator',
@@ -308,19 +308,14 @@ export const Calculators: CalculatorConfig[] = [
   slug: 'wedding-anniversary-calculator',
   category: 'Wedding',
   metadata: {
-    title: 'Wedding Anniversary Calculator | Traditional & Modern Gift Guide',
+    title: 'Wedding Anniversary Calculator',
     description: 'Comprehensive wedding anniversary calculator that provides traditional and modern gift suggestions, symbolic flowers and gemstones, milestone tracking, and countdown to your next anniversary celebration.',
     keywords: [
       'wedding anniversary calculator',
       'marriage anniversary tracker',
-      'traditional anniversary gifts',
-      'modern anniversary gifts',
-      'anniversary gemstones',
-      'anniversary flowers',
       'marriage milestone calculator',
       'anniversary countdown',
       'wedding date calculator',
-      'anniversary gift guide'
     ],
   },
   featured: true,
@@ -335,7 +330,7 @@ export const Calculators: CalculatorConfig[] = [
   slug: 'wedding-photography-pricing-calculator',
   category: 'Photography',
   metadata: {
-    title: 'Wedding Photography Pricing Calculator | Package Cost Estimator',
+    title: 'Wedding Photography Pricing Calculator',
     description: 'Professional wedding photography calculator for estimating complete package costs including coverage hours, second shooter, engagement sessions, albums, and additional services. Perfect for couples planning their wedding photography budget.',
     keywords: [
       'wedding photography calculator',
@@ -344,10 +339,8 @@ export const Calculators: CalculatorConfig[] = [
       'wedding photo cost estimator',
       'wedding photography rates',
       'wedding photography packages',
-      'wedding photography investment',
       'wedding photographer fees',
       'wedding photography services pricing',
-      'wedding photo package builder'
     ],
   },
   featured: true,
@@ -367,11 +360,7 @@ export const Calculators: CalculatorConfig[] = [
           'couple numerology calculator',
           'relationship compatibility calculator',
           'numerology compatibility test',
-          'love numerology calculator',
-          'life path number compatibility',
-          'destiny number calculator couples',
           'relationship numerology',
-          'soul mate numerology calculator',
           'partner compatibility numerology',
           'romantic numerology calculator'
       ],
@@ -386,26 +375,55 @@ export const Calculators: CalculatorConfig[] = [
   title: 'Chaldean Numerology Calculator',
   description: 'Discover your destiny number, soul urge number, personality number, and expression number using ancient Chaldean numerology. Get detailed interpretations of your core numbers and their influence on your life path.',
   slug: 'chaldean-numerology-calculator',
-  category: 'Spirituality',
+  category: 'Numerology',
   metadata: {
-      title: 'Chaldean Numerology Calculator | Name & Birth Date Analysis',
+      title: 'Chaldean Numerology Calculator',
       description: 'Calculate your core numbers using ancient Chaldean numerology. Get detailed interpretations of your destiny, soul urge, personality, and expression numbers. Understand your life path with our comprehensive analysis.',
       keywords: [
           'chaldean numerology calculator',
-          'name numerology calculator',
-          'destiny number calculator',
-          'soul urge number calculator',
-          'personality number calculator',
-          'expression number calculator',
-          'birth date numerology',
-          'numerology meaning calculator',
-          'master numbers calculator',
-          'spiritual number analysis'
       ],
   },
   featured: true,
   dateAdded: '2025-01-03',
   lastUpdated: '2025-01-03',
+},
+
+{
+  id: 'pythagorean-numerology',
+  title: 'Pythagorean Numerology Calculator',
+  description: 'Discover your core numerology numbers including Life Path, Destiny, Soul Urge, Personality, and Maturity numbers with detailed interpretations based on Pythagorean numerology principles.',
+  slug: 'pythagorean-numerology-calculator',
+  category: 'Numerology',
+  metadata: {
+      title: 'Pythagorean Numerology Calculator',
+      description: 'Calculate your Life Path, Destiny, Soul Urge, Personality, and Maturity numbers with detailed interpretations. Free Pythagorean numerology calculator for personal insights.',
+      keywords: [
+          'pythagorean numerology calculator',
+          'maturity number calculator',
+          'pythagorean number system',
+      ],
+  },
+  featured: true,
+  dateAdded: '2025-01-04',
+  lastUpdated: '2025-01-04',
+},
+{
+  id: 'half-seven',
+  title: 'Half Your Age Plus Seven Rule Calculator',
+  description: 'Calculate appropriate dating age ranges using the "half-plus-seven" rule. Get personalized insights about generational gaps, life stages, and compatibility factors.',
+  slug: 'dating-age-range-calculator',
+  category: 'Relationships',
+  metadata: {
+      title: 'Half Your Age Plus Seven Rule Calculator',
+      description: 'Find your ideal dating age range using the half-plus-seven rule. Get detailed analysis of life stages, generational differences, and compatibility insights for meaningful relationships.',
+      keywords: [
+          'half your age plus 7 calculator',
+          'half plus seven rule',
+      ],
+  },
+  featured: true,
+  dateAdded: '2024-01-04',
+  lastUpdated: '2024-01-04',
 },
 
 ] 

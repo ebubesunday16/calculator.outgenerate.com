@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Heart, Sparkles, ArrowRight, ArrowLeft, Calendar, Hash, Percent } from 'lucide-react';
+import { Heart, Sparkles, ArrowRight, ArrowLeft, Calendar, Percent } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 

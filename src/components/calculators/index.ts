@@ -16,6 +16,8 @@ import WeddingAnniversaryCalculator from "./WeddingAnniversaryCalculator/Wedding
 import WeddingPhotographyCalculator from "./WeddingPhotographyCalculator/WeddingPhotographyCalculator";
 import CoupleNumerologyCalculator from "./CoupleNumerologyCalculator/CoupleNumerologyCalculator";
 import ChaldeanNumerologyCalculator from "./ChaldeanNumerologyCalculator/ChaldeanNumerologyCalculator";
+import PythagoreanNumerologyCalculator from "./PythagoreanNumerologyCalculator/PythagoreanNumerologyCalculator";
+import HalfYourAgePlusSevenCalculator from "./HalfYourAgePlusSevenCalculator/HalfYourAgePlusSevenCalculator";
 
 
 type CalculatorComponent = React.ComponentType<{}>;
@@ -38,6 +40,8 @@ export const CALCULATOR_COMPONENTS: Record<string, CalculatorComponent> = {
     'wedding-photography-pricing' : WeddingPhotographyCalculator,
     'couple-numerology' : CoupleNumerologyCalculator,
     'chaldean-numerology' : ChaldeanNumerologyCalculator,
+    'pythagorean-numerology' : PythagoreanNumerologyCalculator,
+    'half-seven' : HalfYourAgePlusSevenCalculator,
     
 }
 
