@@ -411,7 +411,7 @@ export const Calculators: CalculatorConfig[] = [
   id: 'half-seven',
   title: 'Half Your Age Plus Seven Rule Calculator',
   description: 'Calculate appropriate dating age ranges using the "half-plus-seven" rule. Get personalized insights about generational gaps, life stages, and compatibility factors.',
-  slug: 'dating-age-range-calculator',
+  slug: 'half-your-age-plus-7',
   category: 'Relationships',
   metadata: {
       title: 'Half Your Age Plus Seven Rule Calculator',
