@@ -18,6 +18,8 @@ import CoupleNumerologyCalculator from "./CoupleNumerologyCalculator/CoupleNumer
 import ChaldeanNumerologyCalculator from "./ChaldeanNumerologyCalculator/ChaldeanNumerologyCalculator";
 import PythagoreanNumerologyCalculator from "./PythagoreanNumerologyCalculator/PythagoreanNumerologyCalculator";
 import HalfYourAgePlusSevenCalculator from "./HalfYourAgePlusSevenCalculator/HalfYourAgePlusSevenCalculator";
+import ThreeQuarterBirthdayCalculator from "./ThreeQuarterBirthdayCalculator/ThreeQuarterBirthdayCalculator";
+import AcceptableAgeGapCalculator from "./AcceptableAgeGapCalculator/AcceptableAgeGapCalculator";
 
 
 type CalculatorComponent = React.ComponentType<{}>;
@@ -42,6 +44,8 @@ export const CALCULATOR_COMPONENTS: Record<string, CalculatorComponent> = {
     'chaldean-numerology' : ChaldeanNumerologyCalculator,
     'pythagorean-numerology' : PythagoreanNumerologyCalculator,
     'half-seven' : HalfYourAgePlusSevenCalculator,
+    'three-quarter-birthday' : ThreeQuarterBirthdayCalculator,
+    'acceptable-age-gap-calculator' : AcceptableAgeGapCalculator,
     
 }
 

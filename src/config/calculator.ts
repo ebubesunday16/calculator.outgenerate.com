@@ -412,7 +412,7 @@ export const Calculators: CalculatorConfig[] = [
   title: 'Half Your Age Plus Seven Rule Calculator',
   description: 'Calculate appropriate dating age ranges using the "half-plus-seven" rule. Get personalized insights about generational gaps, life stages, and compatibility factors.',
   slug: 'half-your-age-plus-7',
-  category: 'Relationships',
+  category: 'Relationship',
   metadata: {
       title: 'Half Your Age Plus Seven Rule Calculator',
       description: 'Find your ideal dating age range using the half-plus-seven rule. Get detailed analysis of life stages, generational differences, and compatibility insights for meaningful relationships.',
@@ -424,6 +424,50 @@ export const Calculators: CalculatorConfig[] = [
   featured: true,
   dateAdded: '2024-01-04',
   lastUpdated: '2024-01-04',
+},
+  {
+  id: 'three-quarter-birthday',
+  title: '¾ Birthday Calculator',
+  description: `Calculate your exact three-quarter birthday date, discover fun facts, and learn the significance of this unique milestone. Find out when you'll reach 75% through your birth year.`,
+  slug: 'three-quarter-birthday-calculator',
+  category: 'Birthday',
+  metadata: {
+    title: 'Three Quarter Birthday Calculator',
+    description: 'Precise three-quarter birthday calculator to find when you reach 75% of your birth year. Get detailed insights about your ¾ birthday including zodiac signs, seasons, and days until celebration.',
+    keywords: [
+      'three quarter birthday calculator',
+      '3/4 birthday calculator',
+      'three quarter birthday date',
+      'when is my three quarter birthday',
+      '75 percent birthday calculator',
+    ],
+  },
+  featured: false,
+  dateAdded: '2025-01-05',
+  lastUpdated: '2025-01-05',
+},
+
+{
+  id: 'acceptable-age-gap-calculator',
+  title: 'Acceptable Age Gap Calculator',
+  description: `Analyze relationship age differences with our comprehensive Age Gap Calculator. Get detailed compatibility scores, life stage analysis, and social guideline checks to understand the dynamics of age differences in relationships.`,
+  slug: 'acceptable-age-gap-calculator',
+  category: 'Relationship',
+  metadata: {
+    title: 'Acceptable Age Gap Calculator & Analyzer',
+    description: 'Advanced age gap calculator that provides detailed compatibility analysis, life stage comparison, and social guideline checks. Get personalized insights about age differences in relationships, including the "half-plus-seven" rule assessment and comprehensive compatibility scores.',
+    keywords: [
+      'acceptable age gap calculator',
+      'couple age calculator ',
+      'dating age calculator',
+      'age compatibility calculator',
+      'relationship age gap analyzer',
+      'dating age range calculator',
+    ],
+  },
+  featured: true,
+  dateAdded: '2025-01-05',
+  lastUpdated: '2025-01-05',
 },
 
 ] 
