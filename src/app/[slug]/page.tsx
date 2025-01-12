@@ -4,50 +4,80 @@ import { Metadata, ResolvingMetadata } from "next";
 import { Calculators } from "@/config/calculator";
 import { getCalculatorComponent } from "@/components/calculators";
 
+// Define strong types for the props
 interface PageProps {
-    params: Promise<{
+    params: {
         slug: string;
-    }>;
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+    };
+    searchParams: { [key: string]: string | string[] | undefined };
+}
+
+// Constants for better maintainability
+const BASE_URL = 'https://calculator.outgenerate.com';
+const DEFAULT_TITLE = 'Calculator Not Found';
+
+// Separate metadata type for better type safety
+interface CalculatorMetadata {
+    title: string;
+    description: string;
+    keywords: string[];
 }
 
 export async function generateMetadata(
     { params }: PageProps,
-    parent: ResolvingMetadata 
+    parent: ResolvingMetadata
 ): Promise<Metadata> {
-    const resolvedParams = await params;
-    const calculator = getCalculatorsBySlug(resolvedParams.slug)
-    if (!calculator){
-        return{
-            title: 'Calculator Not Found',
+    try {
+        const calculator = getCalculatorsBySlug(params.slug);
+        
+        if (!calculator) {
+            return {
+                title: DEFAULT_TITLE,
+            };
         }
-    }
-    return {
-        title: `${calculator.metadata.title} | OutGenerate`,
-        description: calculator.metadata.description,
-        keywords: calculator.metadata.keywords,
-        metadataBase: new URL('https://calculator.outgenerate.com'),
-        alternates: {
-            canonical: `https://calculator.outgenerate.com/${resolvedParams.slug}`,
-        },
+
+        const { metadata } = calculator;
+        
+        return {
+            title: `${metadata.title} | OutGenerate`,
+            description: metadata.description,
+            keywords: metadata.keywords,
+            metadataBase: new URL(BASE_URL),
+            alternates: {
+                canonical: `${BASE_URL}/${params.slug}`,
+            },
+        };
+    } catch (error) {
+        console.error('Error generating metadata:', error);
+        return {
+            title: DEFAULT_TITLE,
+        };
     }
 }
 
 export default async function CalculatorPage({ params }: PageProps) {
-    const resolvedParams = await params;
-    const calculator = getCalculatorsBySlug(resolvedParams.slug)
-    if (!calculator) {
-        notFound()
+    try {
+        const calculator = getCalculatorsBySlug(params.slug);
+        
+        if (!calculator) {
+            notFound();
+        }
+
+        const CalculatorComponent = getCalculatorComponent(calculator.id);
+        
+        if (!CalculatorComponent) {
+            throw new Error(`Calculator component not found for ID: ${calculator.id}`);
+        }
+
+        return (
+            <main className="max-w-3xl mx-auto">
+                <CalculatorComponent />
+            </main>
+        );
+    } catch (error) {
+        console.error('Error rendering calculator:', error);
+        return <div className="text-center text-red-600">An error occurred while loading the calculator.</div>;
     }
-    const CalculatorComponent = getCalculatorComponent(calculator.id)
-    if (!CalculatorComponent) {
-        return <p>Calculator Object Not Found</p>;
-    }
-    return(
-        <div className="max-w-3xl mx-auto">
-            <CalculatorComponent/>
-        </div>
-    )
 }
 
 export async function generateStaticParams() {
